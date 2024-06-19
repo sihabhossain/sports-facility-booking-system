@@ -10,5 +10,5 @@ app.use(cors());
 app.use("/api/auth", userRoutes);
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
+  res.send("Welcome to sports fecility server");
 });
