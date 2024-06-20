@@ -3,6 +3,7 @@ import { userControllers } from "./user.controller";
 import validateRequest from "../../middlewares/validateRequest";
 import { UserValidations } from "./user.validation";
 import { authControllers } from "../auth/auth.controller";
+import { AuthValidation } from "../auth/auth.validation";
 
 const router = express.Router();
 
@@ -12,6 +13,10 @@ router.post(
   userControllers.createUser
 );
 
-router.post("/login", authControllers.login);
+router.post(
+  "/login",
+  validateRequest(AuthValidation.loginValidationSchema),
+  authControllers.login
+);
 
 export const userRoutes = router;
