@@ -19,7 +19,7 @@ const login = catchAsync(async (req, res) => {
   }
 
   // Generate access and refresh tokens
-  const { refreshToken } = await authServices.loginUser(req.body);
+  const { accessToken, refreshToken } = await authServices.loginUser(req.body);
 
   // Set refreshToken in cookie
   res.cookie("refreshToken", refreshToken, {
@@ -32,7 +32,7 @@ const login = catchAsync(async (req, res) => {
     success: true,
     statusCode: 200,
     message: "User logged in successfully",
-    token: "JWT_TOKEN",
+    token: accessToken,
     data: {
       _id: user._id,
       name: user.name,
