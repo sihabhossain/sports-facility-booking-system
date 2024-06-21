@@ -60,8 +60,8 @@ const createBooking = catchAsync(async (req, res) => {
 
 // Delete (cancel) a booking
 const deleteBooking = catchAsync(async (req, res) => {
-  const { _id } = req.params;
-  const result = await bookingService.deleteBooking(_id);
+  const { id } = req.params;
+  const result = await bookingService.deleteBooking(id);
 
   sendResponse(res, {
     success: true,

@@ -14,7 +14,22 @@ router.post(
   bookingControllers.createBooking
 );
 
+router.get(
+  "/bookings",
+  auth(USER_Role.ADMIN),
+  bookingControllers.getAllBookings
+);
 
+router.get(
+  "/bookings/user",
+  auth(USER_Role.USER),
+  bookingControllers.getAllBookingsOfUser
+);
 
+router.delete(
+  "/bookings/:id",
+  auth(USER_Role.ADMIN),
+  bookingControllers.deleteBooking
+);
 
 export const bookingRoutes = router;
