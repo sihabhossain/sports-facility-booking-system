@@ -1,11 +1,13 @@
-import express, { Request, Response } from "express";
+import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import { userRoutes } from "./app/modules/user/user.route";
 import { facilityRoutes } from "./app/modules/facility/facility.route";
 import { bookingRoutes } from "./app/modules/bookings/booking.route";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 import notFound from "./app/middlewares/notFound";
-export const app = express();
+
+// application
+export const app: Application = express();
 
 // parsers
 app.use(express.json());
