@@ -6,10 +6,10 @@
 
 **Users:**
 
-- **Effortless User Management** (in <span style="color: #28a745;">green</span>)
+- **Effortless User Management** 
   - **Sign Up (POST /api/auth/signup):** Create a new account with your details and secure your login with hashed passwords!
   - **Login (POST /api/auth/login):** Log in with your credentials to obtain a JWT (your secure access key) for other functionalities.
-- **Seamless Booking Management** (in <span style="color: #ffc107;">orange</span>)
+- **Seamless Booking Management** 
   - **Check Availability (GET /api/check-availability):** See available time slots for booking a facility (specify a date or use today's by default).
   - **Create Booking (POST /api/bookings):** Book your chosen facility within available slots (requires JWT authentication).
   - **View Bookings by User (GET /api/bookings/user):** Keep track of all your bookings with ease (requires JWT authentication).
@@ -17,7 +17,7 @@
 
 **Admins** (with extra superpowers!):
 
-- **Facility Management** (in <span style="color: #dc3545;">red</span>)
+- **Facility Management** 
   - **Create Facility (POST /api/facility):** Add new sports facilities with details like name, description, price, and location (requires JWT authentication).
   - **Update Facility (PUT /api/facility/:id):** Update existing facility information to maintain accuracy (requires JWT authentication).
   - **Soft Delete Facility (DELETE /api/facility/:id):** Don't worry, it's not a permanent goodbye! This feature marks facilities as inactive instead of complete removal (requires JWT authentication).

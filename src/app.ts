@@ -13,6 +13,10 @@ export const app: Application = express();
 app.use(express.json());
 app.use(cors());
 
+app.get("/", (req: Request, res: Response) => {
+  res.send("Welcome to sports fecility server");
+});
+
 // routes
 app.use("/api/auth", userRoutes);
 app.use("/api", facilityRoutes);
@@ -21,7 +25,3 @@ app.use("/api", bookingRoutes);
 // errors
 app.use(globalErrorHandler);
 app.use(notFound);
-
-app.get("/", (req: Request, res: Response) => {
-  res.send("Welcome to sports fecility server");
-});
