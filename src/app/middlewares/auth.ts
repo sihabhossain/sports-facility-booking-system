@@ -17,7 +17,7 @@ export const auth = (...requiredRoles: UserRole[]) => {
     }
 
     const verifiedToken = jwt.verify(
-      accessToken as string,
+      accessToken.replace("Bearer ", ""),
       config.jwt_access_secret as string
     );
 
@@ -32,6 +32,9 @@ export const auth = (...requiredRoles: UserRole[]) => {
     if (!requiredRoles.includes(role as UserRole)) {
       throw new AppError(401, "You are not authorized to access this route");
     }
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    req.user = user;
 
     next();
   });
