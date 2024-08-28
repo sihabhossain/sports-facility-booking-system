@@ -5,6 +5,7 @@ const createFacilityValidation = z.object({
   body: z.object({
     name: z.string().nonempty("Name is required"),
     description: z.string().nonempty("Description is required"),
+    image: z.string().nonempty("Image is required"),
     pricePerHour: z
       .number()
       .positive("Price per hour must be a positive number"),
@@ -18,6 +19,7 @@ const updateFacilityValidation = z.object({
   body: z.object({
     name: z.string().optional(),
     description: z.string().optional(),
+    image: z.string().optional(),
     pricePerHour: z
       .number()
       .positive("Price per hour must be a positive number")

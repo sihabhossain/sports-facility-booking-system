@@ -6,6 +6,7 @@ const FacilitySchema: Schema = new Schema({
   description: { type: String, required: true },
   pricePerHour: { type: Number, required: true },
   location: { type: String, required: true },
+  image: { type: String, require: true },
   isDeleted: { type: Boolean, required: true, default: false },
 });
 
