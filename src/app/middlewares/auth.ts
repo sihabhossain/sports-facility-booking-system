@@ -12,6 +12,8 @@ export const auth = (...requiredRoles: UserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const accessToken = req.headers.authorization;
 
+    console.log(accessToken);
+
     if (!accessToken) {
       throw new AppError(401, "You are not authorized to access this route");
     }

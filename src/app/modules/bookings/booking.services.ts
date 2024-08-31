@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import AppError from "../../errors/AppError";
 import Facility from "../facility/facility.model";
 import { User } from "../user/user.model";
@@ -11,8 +12,24 @@ const transformBooking = (booking: any): TBooking => ({
   date: booking.date.toISOString().split("T")[0],
   startTime: booking.startTime,
   endTime: booking.endTime,
-  user: booking.user.toString(),
-  facility: booking.facility.toString(),
+  user: {
+    _id: booking.user._id.toString(),
+    // @ts-ignore
+    name: booking.user.name,
+    email: booking.user.email,
+    phone: booking.user.phone,
+    address: booking.user.address,
+  },
+  facility: {
+    _id: booking.facility._id.toString(),
+    // @ts-ignore
+    name: booking.facility.name,
+    description: booking.facility.description,
+    pricePerHour: booking.facility.pricePerHour,
+    location: booking.facility.location,
+    image: booking.facility.image,
+    isDeleted: booking.facility.isDeleted,
+  },
   payableAmount: booking.payableAmount,
   isBooked: booking.isBooked,
 });
@@ -35,7 +52,9 @@ const getAllBookingsOfUser = async (userEmail: string): Promise<TBooking[]> => {
     throw new AppError(404, "User not found!");
   }
 
-  const bookings = await Booking.find({ user: user._id }).populate("facility");
+  const bookings = await Booking.find({ user: user._id }).populate(
+    "facility user"
+  );
   return bookings.map(transformBooking);
 };
 
@@ -97,7 +116,7 @@ const deleteBooking = async (_id: string): Promise<TBooking> => {
     _id,
     { isBooked: "canceled" },
     { new: true }
-  ).populate("facility");
+  ).populate("facility user");
 
   if (!booking) {
     throw new AppError(404, "Booking not found!");

@@ -11,19 +11,20 @@ export const app: Application = express();
 
 // parsers
 app.use(express.json());
-app.use(cors());
-
 app.use(cors({ origin: "*" }));
 
+// Test route
 app.get("/", (req: Request, res: Response) => {
-  res.send("Welcome to sports fecility server");
+  res.send("Welcome to sports facility server");
 });
 
-// routes
+// API routes
 app.use("/api/auth", userRoutes);
 app.use("/api", facilityRoutes);
 app.use("/api", bookingRoutes);
 
-// errors
+// Global error handler
 app.use(globalErrorHandler);
+
+// 404 Not Found handler
 app.use(notFound);
