@@ -28,5 +28,6 @@ router.delete(
 );
 
 router.get("/facility", FacilityControllers.getAllFacilities);
+router.get("/facility/:id", FacilityControllers.getSingleFacility);
 
 export const facilityRoutes = router;

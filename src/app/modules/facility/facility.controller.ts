@@ -49,9 +49,29 @@ const getAllFacilities = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getSingleFacility = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const result = await FacilityServices.getSingleFacility(id);
+
+  if (!result) {
+    return res.status(404).json({
+      success: false,
+      message: "Facility not found",
+    });
+  }
+
+  res.status(200).json({
+    success: true,
+    message: "Facility retrieved successfully",
+    data: result,
+  });
+});
+
 export const FacilityControllers = {
   createFacility,
   updateFacilty,
   deleteFacilty,
   getAllFacilities,
+  getSingleFacility,
 };

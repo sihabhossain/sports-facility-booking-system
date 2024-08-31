@@ -21,9 +21,15 @@ const getAllFacilities = async () => {
   return result;
 };
 
+const getSingleFacility = async (id: string) => {
+  const result = await Facility.findOne({ _id: id, isDeleted: false });
+  return result;
+};
+
 export const FacilityServices = {
   createFacilityIntoDB,
   updateFacilityIntoDB,
   deleteFacilityIntoDB,
   getAllFacilities,
+  getSingleFacility,
 };
