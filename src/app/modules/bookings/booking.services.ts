@@ -8,31 +8,38 @@ import { calculatePayableAmount, isTimeConflict } from "./booking.utils";
 
 // Helper function to transform Mongoose document to TBooking
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const transformBooking = (booking: any): TBooking => ({
-  date: booking.date.toISOString().split("T")[0],
-  startTime: booking.startTime,
-  endTime: booking.endTime,
-  user: {
-    _id: booking.user._id.toString(),
-    // @ts-ignore
-    name: booking.user.name,
-    email: booking.user.email,
-    phone: booking.user.phone,
-    address: booking.user.address,
-  },
-  facility: {
-    _id: booking.facility._id.toString(),
-    // @ts-ignore
-    name: booking.facility.name,
-    description: booking.facility.description,
-    pricePerHour: booking.facility.pricePerHour,
-    location: booking.facility.location,
-    image: booking.facility.image,
-    isDeleted: booking.facility.isDeleted,
-  },
-  payableAmount: booking.payableAmount,
-  isBooked: booking.isBooked,
-});
+const transformBooking = (booking: any): TBooking => {
+  if (!booking) {
+    throw new AppError(500, "Booking is null or undefined");
+  }
+
+  return {
+    _id: booking._id?.toString(),
+    date: booking.date?.toISOString().split("T")[0],
+    startTime: booking.startTime,
+    endTime: booking.endTime,
+    user: {
+      _id: booking.user?._id?.toString(),
+      // @ts-ignore
+      name: booking.user?.name || "",
+      email: booking.user?.email || "",
+      phone: booking.user?.phone || "",
+      address: booking.user?.address || "",
+    },
+    facility: {
+      _id: booking.facility?._id?.toString(),
+      // @ts-ignore
+      name: booking.facility?.name || "",
+      description: booking.facility?.description || "",
+      pricePerHour: booking.facility?.pricePerHour || 0,
+      location: booking.facility?.location || "",
+      image: booking.facility?.image || "",
+      isDeleted: booking.facility?.isDeleted || false,
+    },
+    payableAmount: booking.payableAmount || 0,
+    isBooked: booking.isBooked,
+  };
+};
 
 // Get all bookings
 const getAllBookings = async (): Promise<TBooking[]> => {
